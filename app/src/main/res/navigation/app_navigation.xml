@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/app_navigation.xml"
+            app:startDestination="@id/recipeDetailsFragment">
+    
+    <fragment android:id="@+id/ordersListsFragment"
+              android:name="mobile.dscfuta.foodie.destinations.OrdersListsFragment"
+              android:label="fragment_orders_lists" tools:layout="@layout/fragment_orders_lists"/>
+    <fragment android:id="@+id/recipeDetailsFragment"
+              android:name="mobile.dscfuta.foodie.destinations.RecipeDetailsFragment"
+              android:label="fragment_recipe_details" tools:layout="@layout/fragment_recipe_details">
+        <action android:id="@+id/action_recipeDetailsFragment_to_ordersListsFragment"
+                app:destination="@id/ordersListsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/allRecipeFragment" android:name="mobile.dscfuta.foodie.destinations.AllRecipeFragment"
+              android:label="fragment_all_recipe" tools:layout="@layout/fragment_all_recipe">
+        <action android:id="@+id/action_allRecipeFragment_to_recipeDetailsFragment"
+                app:destination="@id/recipeDetailsFragment"/>
+    </fragment>
+</navigation>

@@ -3,4 +3,24 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_title">Welcome Back!</string>
+    <string name="login_subtitle">Login to your account</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login_text">Login</string>
+    <string name="new_user">New user?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="signup_title">Create your Account</string>
+    <string name="signup_subtitle">It\'s free and easy to set up!</string>
+    <string name="email_hint">Email address</string>
+    <string name="signup_text">SIGN UP</string>
+    <string name="existing_user">Existing user?</string>
+    <string name="login">Log In</string>
+    <string name="home_subtitle">Select your meal for the day</string>
+    <string name="search_meals_hint">Search for meals, dishes</string>
+    <string name="meal_desc">Our Medium Cheese burger is packed with just \nthe right amount of nutrition including \nveggies you need to kickstart your day.\nPerfect for breakfast choice!</string>
+    <string name="size">size</string>
+    <string name="btn_checkout_recipe">Proceed to Checkout</string>
+    <string name="currency">NGN</string>
 </resources>
