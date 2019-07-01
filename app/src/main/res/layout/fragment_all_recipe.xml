@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".destinations.AllRecipeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+        <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="right"
+                tools:ignore="RtlHardcoded"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/basket"/>
+
+        <mobile.dscfuta.foodie.views.BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textColor="@color/dark_title"
+                android:text="Hello, John"
+                android:id="@+id/helloTitle"
+        />
+        <mobile.dscfuta.foodie.views.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/dark_title"
+                android:text="@string/home_subtitle"
+                android:layout_marginTop="10dp"/>
+
+        <!--Search bar-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/searchbar_background"
+                android:orientation="horizontal">
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/search"/>
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:maxLines="1"
+                      android:maxLength="20"
+                      android:textColor="@color/dark_title"
+                      android:background="#0000"
+                      android:layout_gravity="center_vertical"
+                      android:textSize="17sp"
+                      android:layout_marginRight="15dp"
+                      android:hint="@string/search_meals_hint"/>
+        </LinearLayout>
+
+        <!-- Search bar ends -->
+
+        <!--content -->
+        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        >
+            <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:layout_marginBottom="120dp"
+                                                    android:id="@+id/mealsRecycler">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <!-- Line separator between content and recommended meals -->
+            <ImageView android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#1000"/>
+            <!-- Recommended Meals layout -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="120dp"
+            android:orientation="vertical">
+                <!--TODO Complete recommended layout -->
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
 </FrameLayout>
