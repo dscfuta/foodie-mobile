@@ -5,21 +5,21 @@ import com.google.gson.annotations.SerializedName
 
 data class Login (
 
-    @SerializedName("status")
+    @SerializedName("token")
     @Expose
-    var status: Boolean? = null,
-    @SerializedName("user_uuid")
+    var token: String? = null,
+    @SerializedName("user")
     @Expose
-    var userId: String? = null
+    var user: User? = null
 )
 data class Registration (
 
-    @SerializedName("status")
+    @SerializedName("token")
     @Expose
-    var status: Boolean? = null,
-    @SerializedName("user_uuid")
+    var token: String? = null,
+    @SerializedName("user")
     @Expose
-    var userId: String? = null
+    var user: User? = null
 )
 data class User (
     @SerializedName("status")

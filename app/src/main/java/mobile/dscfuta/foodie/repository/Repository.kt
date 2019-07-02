@@ -22,10 +22,11 @@ class Repository {
         }
     }
 
-    fun login(email: String, password: String ) : LiveData<Login>{
+    fun login(email: String, password: String, token:String ) : LiveData<Login>{
+
 
         val data = MutableLiveData<Login>()
-        apiService.login(email = email, password = password).enqueue(
+        apiService.login(email = email, password = password, token = token).enqueue(
             object : Callback<Login> {
                 override fun onResponse(
                     call: Call<Login>,
@@ -44,12 +45,13 @@ class Repository {
         return data
     }
 
-    fun register(email: String, phone: String, username: String, password: String, address:String)
+    fun register(email: String, phone: String, username: String,
+                 password: String, address:String, token:String )
             : LiveData<Registration>{
 
         val data = MutableLiveData<Registration>()
         apiService.register(email = email,password = password,phone = phone,username = username,
-            address = address ).enqueue(
+            address = address, token = token ).enqueue(
             object : Callback<Registration> {
                 override fun onResponse(
                     call: Call<Registration>,
@@ -67,9 +69,9 @@ class Repository {
         )
         return data
     }
-    fun getUserProfile() : LiveData<User> {
+    fun getUserProfile(token:String) : LiveData<User> {
         val data = MutableLiveData<User>()
-        apiService.getUserProfile().enqueue(
+        apiService.getUserProfile(token).enqueue(
             object : Callback<User> {
                 override fun onResponse(
                     call: Call<User>,
@@ -87,12 +89,12 @@ class Repository {
         )
         return data
     }
-    fun updateProfile(email: String, phone: String, username: String, address:String)
+    fun updateProfile(email: String, phone: String, username: String, address:String,token:String)
             : LiveData<userProfile>{
 
         val data = MutableLiveData<userProfile>()
         apiService.updateProfile(email = email ,phone = phone,username = username,
-            address = address ).enqueue(
+            address = address,token = token ).enqueue(
             object : Callback<userProfile> {
                 override fun onResponse(
                     call: Call<userProfile>,
@@ -110,9 +112,9 @@ class Repository {
         )
         return data
     }
-    fun getAllRecipe() : LiveData<List<Recipe>> {
+    fun getAllRecipe(token:String) : LiveData<List<Recipe>> {
         val data = MutableLiveData<List<Recipe>>()
-        apiService.getAllRecipe().enqueue(
+        apiService.getAllRecipe(token).enqueue(
             object : Callback<List<Recipe>> {
                 override fun onResponse(
                     call: Call<List<Recipe>>,
@@ -130,9 +132,9 @@ class Repository {
         )
         return data
     }
-    fun getSingleRecipe(recipeId:String) : LiveData<Recipe> {
+    fun getSingleRecipe(recipeId:String,token:String) : LiveData<Recipe> {
         val data = MutableLiveData<Recipe>()
-        apiService.getSingleRecipe(recipeId).enqueue(
+        apiService.getSingleRecipe(recipeId, token).enqueue(
             object : Callback<Recipe> {
                 override fun onResponse(
                     call: Call<Recipe>,
@@ -150,9 +152,9 @@ class Repository {
         )
         return data
     }
-    fun getCart() : LiveData<List<CartData>> {
+    fun getCart(token:String) : LiveData<List<CartData>> {
         val data = MutableLiveData<List<CartData>>()
-        apiService.getCartData().enqueue(
+        apiService.getCartData(token).enqueue(
             object : Callback<List<CartData>> {
                 override fun onResponse(
                     call: Call<List<CartData>>,
@@ -170,9 +172,9 @@ class Repository {
         )
         return data
     }
-    fun addToCart(recipeId:String) : LiveData<CartResponse> {
+    fun addToCart(recipeId:String, token:String) : LiveData<CartResponse> {
         val data = MutableLiveData<CartResponse>()
-        apiService.addCartData(recipeId).enqueue(
+        apiService.addCartData(recipeId = recipeId, token = token).enqueue(
             object : Callback<CartResponse> {
                 override fun onResponse(
                     call: Call<CartResponse>,
@@ -190,9 +192,9 @@ class Repository {
         )
         return data
     }
-    fun delteFromCart(recipeId:String) : LiveData<CartResponse> {
+    fun delteFromCart(recipeId:String, token:String) : LiveData<CartResponse> {
         val data = MutableLiveData<CartResponse>()
-        apiService.deleteCart(recipeId).enqueue(
+        apiService.deleteCart(recipeId =recipeId, token=token).enqueue(
             object : Callback<CartResponse> {
                 override fun onResponse(
                     call: Call<CartResponse>,

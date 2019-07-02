@@ -8,20 +8,27 @@ import retrofit2.http.*
 interface APIService {
 
     @GET("profile")
-    fun getUserProfile() : Call<User>
+    fun getUserProfile(@Header("Authorization" ) token:String
+    ) : Call<User>
 
     @GET("recipe/all")
-    fun getAllRecipe(): Call<List<Recipe>>
+    fun getAllRecipe(@Header("Authorization" ) token:String
+    ): Call<List<Recipe>>
 
     @GET("recipe")
-    fun getSingleRecipe(@Field("recipeId") recipeId: String): Call<Recipe>
+    fun getSingleRecipe(@Header("Authorization" ) token:String,
+                        @Field("recipeId") recipeId: String
+    ): Call<Recipe>
 
     @GET("cart")
-    fun getCartData(): Call<List<CartData>>
+    fun getCartData(
+        @Header("Authorization" ) token:String
+    ): Call<List<CartData>>
 
     @POST("login")
     @FormUrlEncoded
     fun login(
+        @Header("Authorization" ) token:String,
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<Login>
@@ -29,6 +36,7 @@ interface APIService {
     @POST("register")
     @FormUrlEncoded
     fun register(
+        @Header("Authorization" ) token:String,
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("phone") phone: String,
@@ -39,6 +47,7 @@ interface APIService {
     @PUT("profile")
     @FormUrlEncoded
     fun updateProfile(
+        @Header("Authorization" ) token:String,
         @Field("email") email: String,
         @Field("email") phone: String,
         @Field("password") username: String,
@@ -48,12 +57,14 @@ interface APIService {
     @POST("cart/add")
     @FormUrlEncoded
     fun addCartData(
-        @Field("recipeId") email: String
+        @Header("Authorization" ) token:String,
+        @Field("recipeId") recipeId: String
     ): Call<CartResponse>
 
     @DELETE("cart/remove")
     @FormUrlEncoded
     fun deleteCart(
-        @Field("recipeId") email: String
+        @Header("Authorization" ) token:String,
+        @Field("recipeId") recipeId: String
     ): Call<CartResponse>
 }
