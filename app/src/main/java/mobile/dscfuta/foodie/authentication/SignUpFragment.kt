@@ -40,6 +40,7 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customViewModel = CustomViewModel()
+        customViewModel.setShareprefContext(context!!)
 
         val SPrefs = customViewModel.setShareprefContext(context!!)
 
@@ -47,21 +48,19 @@ class SignUpFragment : Fragment() {
 
             if(NetworkUtils.isConnected(context!!)) {
 
+                signupPBar.visibility = View.VISIBLE
+
                 if(collectSignupProfileData()) {
 
-                    val data = customViewModel.register(username = username.getText().toString(),
+                    customViewModel.register(username = username.getText().toString(),
                         email = email.getText().toString(),
                         address = address.getText().toString(),
                         phone = phoneNumber.getText().toString(),
-                        password = password.getText().toString()).value!!
-
-                    if(data.token != null){
-                        SPrefs!!.usertoken = data.token
-                        SPrefs.name = username.getText().toString()
-                    }
+                        password = password.getText().toString())
 
                     if (SPrefs!!.usertoken != "") {
 
+                        signupPBar.visibility = View.GONE
                         Toast.makeText(context, "Sign up was successful", Toast.LENGTH_SHORT).show()
                         view.findNavController().navigate(R.id.allRecipeFragment)
                     }

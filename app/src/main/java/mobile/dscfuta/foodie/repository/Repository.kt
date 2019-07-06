@@ -8,6 +8,7 @@ import mobile.dscfuta.foodie.database.*
 import mobile.dscfuta.foodie.remote.APIService
 import mobile.dscfuta.foodie.utils.APIUtils
 import mobile.dscfuta.foodie.utils.SharedprefManager
+import mobile.dscfuta.foodie.utils.SharedprefManager.usertoken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +21,15 @@ class Repository {
         val INSTANCE = Repository()
     }
 
+    lateinit var Spref: SharedPreferences
+
+    //setting up shareprefence
+    fun setShareprefContext(context: Context) {
+        Spref = SharedprefManager.customPreference(context, "PrefsType")!!
+    }
+
     companion object {
+
         fun getInstance() : Repository {
 
             return SingletonHelper.INSTANCE
@@ -28,7 +37,6 @@ class Repository {
     }
 
     fun login(email: String, password: String, token:String ) : LiveData<Login>{
-
 
         val data = MutableLiveData<Login>()
         apiService.login(email = email, password = password, token = token).enqueue(
@@ -62,7 +70,9 @@ class Repository {
                     response: Response<Registration>
                 ) {
                     if (response.isSuccessful) {
+
                         data.value = response.body()
+                        Spref.usertoken
                     }
                 }
 

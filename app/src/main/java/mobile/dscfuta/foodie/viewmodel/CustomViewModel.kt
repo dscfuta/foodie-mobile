@@ -12,6 +12,8 @@ class CustomViewModel : ViewModel() {
 
     //setting up shareprefence
     fun setShareprefContext(context: Context): SharedPreferences? {
+
+        Repository.getInstance().setShareprefContext(context)
         return SharedprefManager.customPreference(context, "PrefsType")
     }
 
