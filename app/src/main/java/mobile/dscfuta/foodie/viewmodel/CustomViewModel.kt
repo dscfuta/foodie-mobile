@@ -1,27 +1,35 @@
 package mobile.dscfuta.foodie.viewmodel
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import mobile.dscfuta.foodie.database.*
 import mobile.dscfuta.foodie.repository.Repository
+import mobile.dscfuta.foodie.utils.SharedprefManager
 
-class CustomViewModel : ViewModel(){
+class CustomViewModel : ViewModel() {
+
+    //setting up shareprefence
+    fun setShareprefContext(context: Context): SharedPreferences? {
+        return SharedprefManager.customPreference(context, "PrefsType")
+    }
 
     //
-    fun login(email: String, password: String,token:String) : LiveData<Login>{
+    fun login(email: String, password: String, token:String) : LiveData<Login>{
         return Repository.getInstance().login(email,password,token)
     }
 
     //returns Register object. Get user token from it and save to shprefs. the token is needed
     //to be passed to every api calls
-    fun  register(email: String, phone: String, username: String, password: String, address:String,token: String )
-            : LiveData<Registration>{
-        return Repository.getInstance().register(email,phone,username,password,address,token )
+    fun  register(email: String, phone: String, username: String, password: String, address:String)
+            : LiveData<Registration> {
+        return Repository.getInstance().register(email,phone,username,password,address)
     }
 
     ///return the user profile information including name, email e.t.c
     fun getUserProfile(token:String) : LiveData<User> {
-        return Repository.getInstance().getUserProfile(token )
+        return Repository.getInstance().getUserProfile(token)
     }
 
     fun updateProfile(email: String, phone: String, username: String, address:String,token:String)
@@ -48,5 +56,4 @@ class CustomViewModel : ViewModel(){
     fun delteFromCart(recipeId:String,token:String) : LiveData<CartResponse> {
         return Repository.getInstance().delteFromCart(recipeId,token)
     }
-
 }

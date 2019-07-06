@@ -36,7 +36,6 @@ interface APIService {
     @POST("register")
     @FormUrlEncoded
     fun register(
-        @Header("Authorization" ) token:String,
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("phone") phone: String,

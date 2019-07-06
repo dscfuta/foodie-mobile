@@ -1,15 +1,19 @@
 package mobile.dscfuta.foodie.repository
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import mobile.dscfuta.foodie.database.*
 import mobile.dscfuta.foodie.remote.APIService
 import mobile.dscfuta.foodie.utils.APIUtils
+import mobile.dscfuta.foodie.utils.SharedprefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class Repository {
+
     private val apiService: APIService = APIUtils.apiService
 
     private object SingletonHelper {
@@ -17,7 +21,8 @@ class Repository {
     }
 
     companion object {
-        fun getInstance() : Repository{
+        fun getInstance() : Repository {
+
             return SingletonHelper.INSTANCE
         }
     }
@@ -46,12 +51,11 @@ class Repository {
     }
 
     fun register(email: String, phone: String, username: String,
-                 password: String, address:String, token:String )
-            : LiveData<Registration>{
+                 password: String, address:String): LiveData<Registration>{
 
         val data = MutableLiveData<Registration>()
         apiService.register(email = email,password = password,phone = phone,username = username,
-            address = address, token = token ).enqueue(
+            address = address).enqueue(
             object : Callback<Registration> {
                 override fun onResponse(
                     call: Call<Registration>,
@@ -67,8 +71,10 @@ class Repository {
                 }
             }
         )
+
         return data
     }
+
     fun getUserProfile(token:String) : LiveData<User> {
         val data = MutableLiveData<User>()
         apiService.getUserProfile(token).enqueue(

@@ -2,23 +2,24 @@ package mobile.dscfuta.foodie.destinations
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_all_recipe.*
 
 import mobile.dscfuta.foodie.R
+import mobile.dscfuta.foodie.adapters.AllRecipeAdapter
+import mobile.dscfuta.foodie.adapters.CartRecipeAdapter
+import mobile.dscfuta.foodie.utils.SharedprefManager.name
+import mobile.dscfuta.foodie.utils.SharedprefManager.usertoken
+import mobile.dscfuta.foodie.viewmodel.CustomViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class OrdersListsFragment : Fragment() {
+
+    lateinit var customViewModel: CustomViewModel
+    lateinit var cartRecipeAdapter: CartRecipeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,5 +29,18 @@ class OrdersListsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_orders_lists, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        customViewModel = CustomViewModel()
+
+        val SPrefs = customViewModel.setShareprefContext(context!!)
+
+        val allCart = customViewModel.getCart(SPrefs!!.usertoken)
+
+        cartRecipeAdapter = CartRecipeAdapter(context!!, allCart.value!!.toMutableList())
+
+        mealsRecycler.setLayoutManager(LinearLayoutManager(context))
+        mealsRecycler.setAdapter(cartRecipeAdapter)
+    }
 }
